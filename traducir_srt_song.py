@@ -16,9 +16,7 @@ except ImportError:
 # ¡IMPORTANTE! No guardes tu API key directamente en el código en producción.
 # Usa variables de entorno o un archivo de configuración seguro.
 # Para este ejemplo, usaremos la que proporcionaste, pero advierte al usuario.
-USER_GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-# Si no se encuentra la variable de entorno, puedes usar una API key de ejemplo (NO RECOMENDADO PARA PRODUCCIÓN)
-# USER_GEMINI_API_KEY = "TU_API_KEY"
+USER_GEMINI_API_KEY = "TU_API_GOOGLE_GEMINI" 
 
 #Modelo por defecto para traducción, rapido y ligero
 DEFAULT_MODEL_NAME = "gemini-2.0-flash-lite" 
@@ -123,19 +121,18 @@ async def translate_srt(input_srt_path, output_srt_path, translator, source_lang
         api_translations_raw = await translator.translate_batch(prompt_blocks, source_lang=source_lang, target_lang=target_lang)
         
         if len(api_translations_raw) != len(current_batch_originals):
-            print(f"¡ADVERTENCIA Lote {num_batch}!: Discrepancia en la cantidad de traducciones.")
-            print(f"  Se esperaban: {len(current_batch_originals)}, Se recibieron: {len(api_translations_raw)}")
+            # print(f"¡ADVERTENCIA Lote {num_batch}!: Discrepancia en la cantidad de traducciones.")
+            # print(f"  Se esperaban: {len(current_batch_originals)}, Se recibieron: {len(api_translations_raw)}")
             # print(f"  Originales en el lote: {current_batch_originals}") # Puede ser muy largo
             # print(f"  Traducciones recibidas (crudo): {api_translations_raw}") # Puede ser muy largo
             
             # Estrategia de mitigación: Usar originales para los faltantes
-            # O rellenar con un placeholder si la traducción falló completamente para algunos
             temp_translations = []
             for k in range(len(current_batch_originals)):
                 if k < len(api_translations_raw) and api_translations_raw[k].strip():
                     temp_translations.append(api_translations_raw[k])
                 else:
-                    print(f"    Usando texto original para el bloque {k+1} del lote debido a traducción faltante/vacía.")
+                    # print(f"    Usando texto original para el bloque {k+1} del lote debido a traducción faltante/vacía.")
                     temp_translations.append(current_batch_originals[k].replace('\n', '\\n')) # Mantener \\n para el post-procesado
             api_translations_raw = temp_translations
 
