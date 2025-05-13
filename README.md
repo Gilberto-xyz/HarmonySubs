@@ -43,7 +43,7 @@ $env:GEMINI_API_KEY="TU_API_KEY"
 2. Ejecuta el script:
 
 ```
-python traducir_v1.2_consola.py
+python traducir_srt_song.py
 ```
 
 3. Elige el archivo de video o subtítulo a traducir cuando se te solicite.
