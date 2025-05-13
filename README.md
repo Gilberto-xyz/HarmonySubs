@@ -67,7 +67,7 @@ python traducir_v1.2_consola.py
 
 ## Créditos
 
-Desarrollado por [Tu Nombre].
+Desarrollado por [Gilberto Nava - Gemini 2.5 pro y o4-mini-high].
 
 ---
 
